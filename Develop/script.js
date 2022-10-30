@@ -1,20 +1,26 @@
 // Assignment code here
-
-
-// Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-function generatePassword(){
- var userinput= window.prompt("How many characters would you like to be")
-  // console.log(userinput)
-  var passwordlength = parseInt(userinput)
+function randomInt(min, max){
+  return Math.floor(Math.random()*(max - min) + min)
+}
 
-  if (isNaN(passwordlength)) {
-    window.alert("Sorry we were looking for a number")
-    return
+function getRandomItem(list) {
+  return list[randomInt(0, list.length - 1)]
   }
 
-  if (passwordlength < 8 || passwordlength > 128) {
+function generatePassword() {
+
+  var userinput = window.prompt("How many characters would you like to be")
+ 
+  var passwordLength = parseInt(userinput)
+
+  if (isNaN(passwordLength)) {
+    window.alert("Sorry we were looking for a number")
+  return
+  }
+ 
+  if (passwordLength < 8 || passwordLength > 128) {
     window.alert("Password has to be between 8 and 128 characters")
     return
   }
@@ -29,16 +35,47 @@ function generatePassword(){
   var lowercaseList = ["abcdefghijklmnopqrstuvwxyz"]
   var uppercaseList = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 
-  
-  var randomNumber = Math.floor(Math.random()* 128)
+  var optionsCart = []
 
-  var password= '';
-  for(var i=0; i < numberList; i++) {
-    console.log(Math.floor(math.random() * 2))
+  if (userwantsNumbers === true) {
+    optionsCart.push(numberList)
   }
-  
-}
 
+  if (userwantsSymbols === true) {
+    optionsCart.push(symbolList)
+  }
+
+  if (userwantsLowercase === true) {
+    optionsCart.push(lowercaseList)
+  }
+
+  if (userwantsUppercase === true) {
+    optionsCart.push(uppercaseList)
+  }
+
+  var generatedPassword = ""
+
+  for (var i = 0; 1 < passwordLength; i++) {
+    var randomList = getRandomItem(optionsCart)
+    var randomCharacter = getRandomItem(randomList)
+    console.log(randomCharacter)
+  }
+
+  // var randomNumber = Math.floor(Math.random()* 128)
+
+  // var password= '';
+  // for(var i=0; i < numberList; i++) {
+  //   console.log(Math.floor(math.random() * 2))}
+
+  // for(var i=0; i < symbolList; i++) {
+  //   console.log(Math.floor(math.random() * 2))}
+  
+  // for(var i=0; i < lowercaseList; i++) {
+  //   console.log(Math.floor(math.random() * 2))}
+
+  // for(var i=0; i < uppercaseList; i++) {
+  //   console.log(Math.floor(math.random() * 2))}S
+}
 
 // Write password to the #password input
 function writePassword() {
