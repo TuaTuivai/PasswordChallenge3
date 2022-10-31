@@ -2,7 +2,13 @@
 var generateBtn = document.querySelector("#generate");
 
 function randomInt(min, max){
-  return Math.floor(Math.random()*(max - min) + min)
+  if(!max) {
+    max = min
+    min = 0
+  }
+  // random sets up to obtain a random character within the string
+  var random = Math.random()
+  return Math.floor(min * (1 - random) + random*max)
 }
 
 function getRandomItem(list) {
@@ -14,7 +20,7 @@ function generatePassword() {
   var userinput = window.prompt("How many characters would you like to be")
  
   var passwordLength = parseInt(userinput)
-
+// if statement will return user back to main window if password does not meeet standards
   if (isNaN(passwordLength)) {
     window.alert("Sorry we were looking for a number")
   return
@@ -24,57 +30,48 @@ function generatePassword() {
     window.alert("Password has to be between 8 and 128 characters")
     return
   }
-
+// created window confirmation to obtain user choice in generating a new password
   var userwantsNumbers = window.confirm("Would you like numbers in generated password?")
   var userwantsSymbols = window.confirm("Would you like special characters in generated password?")
   var userwantsLowercase = window.confirm("Would you like lowercase characters in generated password?")
   var userwantsUppercase = window.confirm("Would you like uppercase characters in generated password?")
-
-  var numberList = ["0,1,2,3,4,5,6,7,8,9"]
-  var symbolList = ["!,@,#,$,%,^,&,*"]
-  var lowercaseList = ["abcdefghijklmnopqrstuvwxyz"]
-  var uppercaseList = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
-
-  var optionsCart = []
+// created a list of possible choices to run for generated password
+  var numberList = ["0","1","2","3","4","5","6","7","8","9"]
+  var symbolList = ["!","@","#","$","%","^","&","*"]
+  var lowercaseList = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+  var uppercaseList = ["A", "B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+// created a grablist to combine user choices from Lists of strings
+  var grabList = []
 
   if (userwantsNumbers === true) {
-    optionsCart.push(numberList)
+    grabList.push(numberList)
   }
 
   if (userwantsSymbols === true) {
-    optionsCart.push(symbolList)
+    grabList.push(symbolList)
   }
 
   if (userwantsLowercase === true) {
-    optionsCart.push(lowercaseList)
+    grabList.push(lowercaseList)
   }
 
   if (userwantsUppercase === true) {
-    optionsCart.push(uppercaseList)
+    grabList.push(uppercaseList)
   }
-
+  // created safety net if user chooses to opt out of selecting from list of strings for generated code and will automatically select from symbol list
+  if (grabList.length === 0 ) {
+    grabList.push(symbolList)
+  }
+  // Generated password variable collects users selecttion of strings for random password
   var generatedPassword = ""
 
-  for (var i = 0; 1 < passwordLength; i++) {
-    var randomList = getRandomItem(optionsCart)
-    var randomCharacter = getRandomItem(randomList)
-    console.log(randomCharacter)
+  for (var i = 0; i < passwordLength; i++) {
+    var randomList = getRandomItem(grabList)
+    var randomCharacters = getRandomItem(randomList)
+    generatedPassword += randomCharacters
   }
-
-  // var randomNumber = Math.floor(Math.random()* 128)
-
-  // var password= '';
-  // for(var i=0; i < numberList; i++) {
-  //   console.log(Math.floor(math.random() * 2))}
-
-  // for(var i=0; i < symbolList; i++) {
-  //   console.log(Math.floor(math.random() * 2))}
-  
-  // for(var i=0; i < lowercaseList; i++) {
-  //   console.log(Math.floor(math.random() * 2))}
-
-  // for(var i=0; i < uppercaseList; i++) {
-  //   console.log(Math.floor(math.random() * 2))}S
+  // allows for password to be created and returned on to website
+return generatedPassword
 }
 
 // Write password to the #password input
