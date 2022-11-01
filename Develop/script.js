@@ -1,7 +1,7 @@
 // Assignment code here
 var generateBtn = document.querySelector("#generate");
 
-function randomInt(min, max){
+function randomInteger(min, max){
   if(!max) {
     max = min
     min = 0
@@ -12,12 +12,12 @@ function randomInt(min, max){
 }
 
 function getRandomItem(list) {
-  return list[randomInt(0, list.length - 1)]
+  return list[randomInteger(0, list.length - 1)]
   }
 
 function generatePassword() {
 
-  var userinput = window.prompt("How many characters would you like to be")
+  var userinput = window.prompt("How many characters would you like your password to be")
  
   var passwordLength = parseInt(userinput)
 // if statement will return user back to main window if password does not meeet standards
@@ -42,7 +42,7 @@ function generatePassword() {
   var uppercaseList = ["A", "B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 // created a grablist to combine user choices from Lists of strings
   var grabList = []
-
+// .push allows for () list to be in function
   if (userwantsNumbers === true) {
     grabList.push(numberList)
   }
